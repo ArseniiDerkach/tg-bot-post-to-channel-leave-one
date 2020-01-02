@@ -28,7 +28,7 @@ http.createServer().listen(process.env.PORT || 5000).on('request', function(req,
     res.end('')
 });
 setInterval(function(){
-    https.get('https://https://tg-ad-bot-replace-message.herokuapp.com//')
+    https.get('https://tg-ad-bot-replace-message.herokuapp.com//')
 },300000)
 
 const channelId = -1001391164414;
