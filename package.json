@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node app"
+    "start": "node app.js"
   },
   "engines": {
     "node": "9.11.2"
   },
-  "keywords": [],
-  "author": "",
+  "author": "Arsenii",
   "license": "ISC",
   "dependencies": {
     "mongodb": "^3.4.1",
