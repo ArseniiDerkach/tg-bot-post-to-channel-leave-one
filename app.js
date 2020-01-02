@@ -115,7 +115,9 @@ bot.on('left_chat_member', (ctx) => {
     console.log(ctx.message)
 })
 
-setInterval(replaceMessage,10000);
+replaceMessage();
+
+setInterval(replaceMessage,300000);
 
 bot.command('view', async ctx=>{
     if (ctx.message.chat.id == groupId) {
