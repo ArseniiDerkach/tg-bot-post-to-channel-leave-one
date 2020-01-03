@@ -9,7 +9,7 @@ const telegram = new Telegram('945599100:AAHAw1jgR_gmQ1pj1MKJlhgnuWjdMC6Vv4E', {
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
 const fs = require('fs');
-
+d
 const { getAd, updateAd } = require('./db/db');
 
 const mainKeyboard = Markup.keyboard([
@@ -52,9 +52,6 @@ bot.command('echo', async ctx=>{
     if (ctx.message.chat.id == groupId) {
         return true;
     }
-    const data = await getAd();
-    json = JSON.stringify(data);
-    fs.writeFile('data.json', json, 'utf8');
 })
 
 const replaceMessage = async () =>{
