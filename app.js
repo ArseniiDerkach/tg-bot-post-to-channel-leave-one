@@ -8,6 +8,7 @@ const telegram = new Telegram('945599100:AAHAw1jgR_gmQ1pj1MKJlhgnuWjdMC6Vv4E', {
 });
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
+const fs = require('fs');
 
 const { getAd, updateAd } = require('./db/db');
 
@@ -37,48 +38,6 @@ const groupId = -1001257486779;
 
 let id;
 
-const data = {
-    "ok":true,
-    "result":
-        [
-            {
-                "update_id":30777782, 
-                "message":
-                {
-                    "message_id":7,
-                    "from":{
-                        "id":70698447,
-                        "is_bot":false,
-                        "first_name":"Arsenii",
-                        "last_name":"Derkach",
-                        "username":"arseniiderkach",
-                        "language_code":"ru"
-                    },
-                    "chat":{
-                        "id":-1001257486779,
-                        "title":"test group ad",
-                        "type":"supergroup"
-                    },
-                    "date":1577913024,
-                    "left_chat_participant":{
-                        "id":51112222,
-                        "is_bot":false,
-                        "first_name":"Kon$tantin",
-                        "last_name":"\ud83d\udc38",
-                        "username":"krrryakwa"
-                    },
-                    "left_chat_member":{
-                        "id":51112222,
-                        "is_bot":false,
-                        "first_name":"Kon$tantin",
-                        "last_name":"\ud83d\udc38",
-                        "username":"krrryakwa"
-                    }
-                }
-            }
-        ]
-    }
-
 
 let isEditing = false;
 
@@ -93,9 +52,9 @@ bot.command('echo', async ctx=>{
     if (ctx.message.chat.id == groupId) {
         return true;
     }
-    console.log(await telegram.getChat(groupId));
-    telegram.sendMessage(groupId, 'ping').then((res)=>{ id = res.message_id;console.log(res.message_id)})
-    telegram.deleteMessage(groupId,10);
+    const data = await getAd();
+    json = JSON.stringify(data);
+    fs.writeFile('data.json', json, 'utf8');
 })
 
 const replaceMessage = async () =>{
