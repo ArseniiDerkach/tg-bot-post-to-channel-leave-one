@@ -8,9 +8,7 @@ const telegram = new Telegram('945599100:AAHAw1jgR_gmQ1pj1MKJlhgnuWjdMC6Vv4E', {
 });
 const Extra = require('telegraf/extra')
 const Markup = require('telegraf/markup')
-const fs = require('fs');
-d
-const { getAd, updateAd } = require('./db/db');
+const fetch = require('node-fetch');
 
 const mainKeyboard = Markup.keyboard([
   Markup.callbackButton('Изменить сообщение', 'edit'),
@@ -31,6 +29,24 @@ http.createServer().listen(process.env.PORT || 5000).on('request', function(req,
 setInterval(function(){
     https.get('https://tg-ad-bot-replace-message.herokuapp.com//')
 },300000)
+
+const url = "https://api.myjson.com/bins/1a015w";
+
+const getAd = async() => {
+    const settings = { method: "GET"};
+    const data = await (await fetch(url,settings)).json();
+    return data;
+}
+
+const updateAd = async (newData) =>{
+    fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify(newData),
+        mode: 'cors',
+        headers: {
+        'Content-Type': 'application/json'
+    }});
+}
 
 const channelId = -1001391164414;
 
@@ -73,7 +89,7 @@ bot.on('left_chat_member', (ctx) => {
 
 replaceMessage();
 
-setInterval(replaceMessage,300000);
+setInterval(replaceMessage,10000);
 
 bot.command('view', async ctx=>{
     if (ctx.message.chat.id == groupId) {
