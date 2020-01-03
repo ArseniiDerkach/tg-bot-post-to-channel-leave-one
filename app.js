@@ -86,6 +86,7 @@ bot.on('left_chat_member', (ctx) => {
     telegram.deleteMessage(groupId,ctx.message.message_id);
     console.log(ctx.message)
 })
+ds
 
 replaceMessage();
 
